@@ -1,4 +1,4 @@
-# MiniCheck
+# MiniCheck [![Build Status](https://secure.travis-ci.org/workshare/mini-check.png)](http://travis-ci.org/workshare/mini-check)
 
 MiniCheck provides a simple Rack application for adding simple health checks to your app.
 The JSON output is similar to the one provided by the [Metrics](http://metrics.codahale.com/) Java library.
