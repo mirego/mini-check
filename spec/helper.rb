@@ -22,3 +22,6 @@ $LOAD_PATH.unshift File.expand_path('lib')
 require 'mini_check'
 
 $LOAD_PATH.unshift File.expand_path('spec/support')
+
+require 'codeclimate-test-reporter'
+CodeClimate::TestReporter.start

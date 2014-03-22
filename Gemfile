@@ -7,5 +7,6 @@ group :test, :development do
   gem 'rspec'
   gem 'pry'
   gem 'rack-test'
+  gem 'codeclimate-test-reporter', require: false
 end
 
