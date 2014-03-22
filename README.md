@@ -4,6 +4,7 @@ MiniCheck provides a simple Rack application for adding simple health checks to 
 The JSON output is similar to the one provided by the [Metrics](http://metrics.codahale.com/) Java library.
 It was started at [Workshare ltd.](http://www.workshare.com) as an easy way of providing monitoring to our Rack based applciations.
 
+[![Gem Version](https://badge.fury.io/rb/mini_check.png)](http://badge.fury.io/rb/mini_check)
 [![Build Status](https://secure.travis-ci.org/workshare/mini-check.png)](http://travis-ci.org/workshare/mini-check) 
 [![Code Climate](https://codeclimate.com/github/workshare/mini-check.png)](https://codeclimate.com/github/workshare/mini-check)
 
