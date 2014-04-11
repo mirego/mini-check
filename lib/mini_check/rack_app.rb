@@ -41,12 +41,8 @@ module MiniCheck
       checks.to_hash.to_json
     end
 
-    def generally_healthy?
-      checks.healthy?
-    end
-
     def status
-      generally_healthy? ? 200 : 500
+      checks.healthy? ? 200 : 500
     end
   end
 end
