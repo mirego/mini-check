@@ -10,13 +10,13 @@ module MiniCheck
     end
 
     def healthy?
-      !detect{|c| !c.healthy? }
+      all?(&:healthy?)
     end
 
     def run
       each{|c| c.run }
     end
-    
+
     def register name, &block
       self.<< Check.new(name, &block)
     end
