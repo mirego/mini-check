@@ -1,12 +1,7 @@
 module MiniCheck
   class ChecksCollection < Array
     def to_hash
-      resp = {}
-      each.map do |check|
-        resp[check.name] = check.to_hash
-      end
-
-      resp
+      Hash[map { |check| [check.name, check.to_hash] }]
     end
 
     def healthy?
