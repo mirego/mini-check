@@ -8,7 +8,7 @@ module MiniCheck
     def initialize args = {}, &block
       args = {name: args} if !args.is_a?(Hash)
       args[:action] = block if block_given?
-      
+
       set_attributes args
     end
 
@@ -29,11 +29,18 @@ module MiniCheck
     def to_hash
       {}.tap do |h|
         h[:healthy] = healthy?
-        h[:error] = {message: exception.message, stack: exception.backtrace} if exception
+        h[:error] = error_hash if exception
       end
     end
 
     private
+
+    def error_hash
+      {
+        message: exception.message,
+        stack: exception.backtrace
+      }
+    end
 
     def set_attributes args = {}
       args.each do |k,v|
