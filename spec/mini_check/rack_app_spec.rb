@@ -68,18 +68,20 @@ describe MiniCheck::RackApp do
       end
 
       it 'calls run on the checks' do
-        expect(checks).to receive(:run).and_return(true)
+        expect(checks).to receive(:run)
         do_request
       end
 
-      it 'returns each check' do
-        expect(checks).to receive(:healthy?).and_return(true)
+      it 'has status 200 when checks are healthy' do
+        allow(checks).to receive(:healthy?).and_return(true)
         do_request
+        expect(status).to eq(200)
       end
 
-      it 'has status 500 when one check is failing' do
-        expect(checks).to receive(:healthy?).and_return(true)
+      it 'has status 500 when checks are failing' do
+        allow(checks).to receive(:healthy?).and_return(false)
         do_request
+        expect(status).to eq(500)
       end
     end
   end
