@@ -9,4 +9,3 @@ group :test, :development do
   gem 'rack-test'
   gem 'codeclimate-test-reporter', require: false
 end
-

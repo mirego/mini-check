@@ -22,10 +22,8 @@ MyHealthCheck.register('health.db_connection'){ MyApp.db_connection.fetch('show 
 Mount it in your `config.ru`:
 
 ```ruby
-run Rack::Cascade.new([
-  MyHealthCheck,
-  MyApp,
-])
+use MyHealthCheck
+run MyApp
 ```
 
 If you now visit `http://localhost:XXXX/healthcheck` you should get something like:

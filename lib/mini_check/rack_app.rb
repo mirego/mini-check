@@ -17,12 +17,18 @@ module MiniCheck
         checks.run
         [status, headers, [body]]
       else
-        [404, headers, []]
+        host_app.call(env)
       end
     end
 
     def register name, &block
       checks.register name, &block
+    end
+
+    def new(app)
+      copy = self.dup
+      copy.host_app = app
+      copy
     end
 
     private
@@ -43,6 +49,14 @@ module MiniCheck
 
     def status
       checks.healthy? ? 200 : 500
+    end
+
+    protected
+
+    attr_accessor :host_app
+
+    def host_app
+      @host_app ||= lambda{|env|  [404, {}, []]}
     end
   end
 end
