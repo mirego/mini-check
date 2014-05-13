@@ -68,6 +68,11 @@ The registered lambdas should do any of the following things:
 The http status code will be 200 if all checks are healthy and 500 otherwise.
 
 
+## Maintaining
+
+Here is a good tutorial on this: 
+[Developing a RubyGem using Bundler](https://github.com/radar/guides/blob/master/gem-development.md).
+
 ## License
 
 Released under the MIT License.  See the [LICENSE](LICENSE.md) file for further details.
