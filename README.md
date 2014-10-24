@@ -67,6 +67,32 @@ The registered lambdas should do any of the following things:
 
 The http status code will be 200 if all checks are healthy and 500 otherwise.
 
+## Version
+
+```ruby
+MyVersionCheck = MiniCheck::VersionRackApp.new(name: 'Cards', path: '/admin/version', build_file: './config/build.yml').tap do |app|
+    app.metadata["Whatever Here"] = "Bla Bla"
+    ...
+end
+```
+
+The build_file can be a YML or a plain text file. It needs to have pairs key-values.
+
+If you now visit `http://localhost:XXXX/admin/version.json` you should get something like:
+
+```json
+{
+  "Application Name": "Cards",
+  "Whatever Here": "Bla Bla"
+}
+```
+
+If you now visit `http://localhost:XXXX/admin/version` you should get something like:
+
+```
+  Application Name=Cards
+  Whatever Here=Bla Bla
+```
 
 ## Maintaining
 
