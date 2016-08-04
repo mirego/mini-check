@@ -17,7 +17,7 @@ describe MiniCheck::Check do
 
   describe 'initialize' do
     it 'allows passing attributes as a hash' do
-      check = MiniCheck::Check.new name: name, action: action 
+      check = MiniCheck::Check.new name: name, action: action
       expect(check.name).to eq(name)
       expect(check.action).to eq(action)
     end
@@ -92,6 +92,10 @@ describe MiniCheck::Check do
   end
 
   describe 'to_hash' do
+    before do
+      allow_any_instance_of(Benchmark::Tms).to receive(:real).and_return(1.0)
+    end
+
     context 'when the run was successful' do
       before :each do
         allow(action).to receive(:call).and_return(Object.new)
@@ -99,7 +103,7 @@ describe MiniCheck::Check do
 
       it 'returns the basic healthy hash' do
         subject.run
-        expect(subject.to_hash).to eq(healthy: true)
+        expect(subject.to_hash).to eq(healthy: true, time: 1.0)
       end
     end
 
@@ -110,7 +114,7 @@ describe MiniCheck::Check do
 
       it 'returns the basic healthy hash' do
         subject.run
-        expect(subject.to_hash).to eq(healthy: false)
+        expect(subject.to_hash).to eq(healthy: false, time: 1.0)
       end
     end
 
@@ -124,11 +128,12 @@ describe MiniCheck::Check do
         subject.run
         expect(subject.to_hash).to eq(
           {
-            :healthy => false,
-            :error => {
-              :message => exception.message,
-              :stack => exception.backtrace,
-            }
+            healthy: false,
+            error: {
+              message: exception.message,
+              stack: exception.backtrace
+            },
+            time: 1.0
           }
         )
       end

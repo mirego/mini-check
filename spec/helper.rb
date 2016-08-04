@@ -15,7 +15,7 @@ require 'pry'
 RSpec.configure do |config|
    config.color_enabled = true
    config.tty = true
-   config.formatter = :documentation # :documentation, :progress, :html, :textmate
+   config.formatter = :documentation
 end
 
 $LOAD_PATH.unshift File.expand_path('lib')

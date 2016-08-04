@@ -1,8 +1,11 @@
+require 'benchmark'
+
 module MiniCheck
   class Check
     attr_accessor :name
     attr_accessor :healthy
     attr_accessor :action
+    attr_accessor :time
     attr_accessor :exception
 
     def initialize args = {}, &block
@@ -17,23 +20,30 @@ module MiniCheck
     end
 
     def run
-      begin
-        self.healthy = action.call
-        self.exception = nil
-      rescue Exception => e
-        self.healthy = false
-        self.exception = e
-      end
+      self.time = Benchmark.measure do
+        begin
+          do_run
+          self.exception = nil
+        rescue Exception => e
+          self.healthy = false
+          self.exception = e
+        end
+      end.real
     end
 
     def to_hash
       {}.tap do |h|
         h[:healthy] = healthy?
+        h[:time] = time
         h[:error] = error_hash if exception
       end
     end
 
     private
+
+    def do_run
+      self.healthy = action.call
+    end
 
     def error_hash
       {

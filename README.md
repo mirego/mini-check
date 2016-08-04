@@ -5,7 +5,7 @@ The JSON output is similar to the one provided by the [Metrics](http://metrics.c
 It was started at [Workshare ltd.](http://www.workshare.com) as an easy way of providing monitoring to our Rack based applciations.
 
 [![Gem Version](https://badge.fury.io/rb/mini_check.png)](http://badge.fury.io/rb/mini_check)
-[![Build Status](https://secure.travis-ci.org/workshare/mini-check.png)](http://travis-ci.org/workshare/mini-check) 
+[![Build Status](https://secure.travis-ci.org/workshare/mini-check.png)](http://travis-ci.org/workshare/mini-check)
 [![Code Climate](https://codeclimate.com/github/workshare/mini-check.png)](https://codeclimate.com/github/workshare/mini-check)
 
 ## Quick Start
@@ -31,10 +31,12 @@ If you now visit `http://localhost:XXXX/healthcheck` you should get something li
 ```json
 {
   "health.db_connection": {
-    "healthy": true
+    "healthy": true,
+    "time": 0.111403303
   },
   "health.redis_client": {
-    "healthy": true
+    "healthy": true,
+    "time": 4.41e-05
   }
 }
 ```
@@ -56,11 +58,13 @@ The registered lambdas should do any of the following things:
         "/home/manuel/sd/my_app/vendor/bundle/ruby/1.9.1/gems/sequel-4.7.0/lib/sequel/adapters/mysql2.rb:77:in `block in _execute'",
         "/home/manuel/sd/my_app/vendor/bundle/ruby/1.9.1/gems/sequel-4.7.0/lib/sequel/database/logging.rb:37:in `log_yield'",
         "..."
-      ]
+      ],
+      "time": 4.61e-05
     }
   },
   "health.redis_client": {
-    "healthy": true
+    "healthy": true,
+    "time": 1.23e-04
   }
 }
 ```
@@ -96,7 +100,7 @@ If you now visit `http://localhost:XXXX/admin/version` you should get something 
 
 ## Maintaining
 
-Here is a good tutorial on this: 
+Here is a good tutorial on this:
 [Developing a RubyGem using Bundler](https://github.com/radar/guides/blob/master/gem-development.md).
 
 ## License

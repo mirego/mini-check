@@ -3,6 +3,10 @@ module MiniCheck
     attr_accessor :checks
     attr_accessor :path
 
+    HEADERS = {'Content-Type' => 'application/json'}.freeze
+    REQUEST_METHOD = 'REQUEST_METHOD'.freeze
+    PATH_INFO = 'PATH_INFO'.freeze
+
     def initialize args = {}
       set_attributes args
     end
@@ -12,10 +16,10 @@ module MiniCheck
     end
 
     def call env
-      case "#{env['REQUEST_METHOD']} #{env['PATH_INFO']}"
+      case "#{env[REQUEST_METHOD]} #{env[PATH_INFO]}"
       when "GET #{path}"
         checks.run
-        [status, headers, [body]]
+        [status, HEADERS, [body]]
       else
         host_app.call(env)
       end
@@ -26,9 +30,9 @@ module MiniCheck
     end
 
     def new(app)
-      copy = self.dup
-      copy.host_app = app
-      copy
+      dup.tap do |copy|
+        copy.host_app = app
+      end
     end
 
     private
@@ -37,10 +41,6 @@ module MiniCheck
       args.each do |k,v|
         send("#{k}=", v)
       end
-    end
-
-    def headers
-      {'Content-Type' => 'application/json'}
     end
 
     def body
@@ -56,7 +56,7 @@ module MiniCheck
     attr_accessor :host_app
 
     def host_app
-      @host_app ||= lambda{|env|  [404, {}, []]}
+      @host_app ||= lambda { |env|  [404, {}, []] }
     end
   end
 end
