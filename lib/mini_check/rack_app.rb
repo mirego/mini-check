@@ -3,7 +3,8 @@ module MiniCheck
     attr_accessor :checks
     attr_accessor :path
 
-    HEADERS = {'Content-Type' => 'application/json'}.freeze
+    CONTENT_TYPE_HEADER = 'Content-Type'.freeze
+    JSON_MIME_TYPE = 'application/json'.freeze
     REQUEST_METHOD = 'REQUEST_METHOD'.freeze
     PATH_INFO = 'PATH_INFO'.freeze
 
@@ -19,7 +20,7 @@ module MiniCheck
       case "#{env[REQUEST_METHOD]} #{env[PATH_INFO]}"
       when "GET #{path}"
         checks.run
-        [status, HEADERS, [body]]
+        [status, default_headers, [body]]
       else
         host_app.call(env)
       end
@@ -36,6 +37,10 @@ module MiniCheck
     end
 
     private
+
+    def default_headers
+      { CONTENT_TYPE_HEADER => JSON_MIME_TYPE }
+    end
 
     def set_attributes args = {}
       args.each do |k,v|
