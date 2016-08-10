@@ -7,8 +7,9 @@ module MiniCheck
     REQUEST_METHOD = 'REQUEST_METHOD'.freeze
     PATH_INFO = 'PATH_INFO'.freeze
     APP_KEY = 'Application Name'.freeze
-    JSON_HEADERS = {'Content-Type' => 'application/json'}.freeze
-    PLAIN_HEADERS = {'Content-Type' => 'text/plain'}.freeze
+    CONTENT_TYPE_HEADER = 'Content-Type'.freeze
+    JSON_MIME_TYPE = 'application/json'.freeze
+    TEXT_MIME_TYPE = 'text/plain'.freeze
 
     def initialize args = {}
       set_attributes args
@@ -89,20 +90,34 @@ module MiniCheck
 
 
     class JsonResponse
-      def self.render hash
-        [200, JSON_HEADERS, [hash.to_json]]
+      class << self
+        def render hash
+          [200, default_headers, [hash.to_json]]
+        end
+
+        private
+
+        def default_headers
+          { CONTENT_TYPE_HEADER => JSON_MIME_TYPE }
+        end
       end
     end
 
     class PlainTextResponse
-      def self.render hash
-        [200, PLAIN_HEADERS, [parse(hash)]]
-      end
+      class << self
+        def render hash
+          [200, default_headers, [parse(hash)]]
+        end
 
-      private
+        private
 
-      def self.parse hash
-        hash.map{ |key,value| "#{key}=#{value}" }.join("\n")
+        def parse hash
+          hash.map{ |key,value| "#{key}=#{value}" }.join("\n")
+        end
+
+        def default_headers
+          { CONTENT_TYPE_HEADER => TEXT_MIME_TYPE }
+        end
       end
     end
   end
