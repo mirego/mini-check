@@ -1,10 +1,10 @@
 require_relative '../helper'
 
 shared_examples_for 'checks collection' do
-  it{ should respond_to(:to_hash) }
-  it{ should respond_to(:healthy?) }
-  it{ should respond_to(:<<) }
-  it{ should respond_to(:run) }
+  it{ is_expected.to respond_to(:to_hash) }
+  it{ is_expected.to respond_to(:healthy?) }
+  it{ is_expected.to respond_to(:<<) }
+  it{ is_expected.to respond_to(:run) }
 end
 
 describe MiniCheck::ChecksCollection do
@@ -18,7 +18,7 @@ describe MiniCheck::ChecksCollection do
     @name_counter ||= 0
     stubs[:name] = "name_#{@name_counter += 1}"
     stubs.merge! args
-    
+
     double(stubs[:name], stubs)
   end
 

@@ -6,7 +6,6 @@ It was started at [Workshare ltd.](http://www.workshare.com) as an easy way of p
 
 [![Gem Version](https://badge.fury.io/rb/mini_check.png)](http://badge.fury.io/rb/mini_check)
 [![Build Status](https://secure.travis-ci.org/workshare/mini-check.png)](http://travis-ci.org/workshare/mini-check)
-[![Code Climate](https://codeclimate.com/github/workshare/mini-check.png)](https://codeclimate.com/github/workshare/mini-check)
 
 ## Quick Start
 

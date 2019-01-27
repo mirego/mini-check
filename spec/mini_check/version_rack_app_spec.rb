@@ -28,7 +28,7 @@ describe MiniCheck::VersionRackApp do
   describe :call do
     it 'returns status, headers, body' do
       get '/'
-      expect(status).to be_a(Fixnum)
+      expect(status).to be_a(Integer)
       expect(headers).to be_a(Hash)
       expect(body).to be_a(String)
     end
