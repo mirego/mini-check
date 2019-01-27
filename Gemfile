@@ -4,9 +4,8 @@ gemspec
 
 group :test, :development do
   gem 'rake'
-  gem 'rspec', '~> 2.14.0'
+  gem 'rspec', '~> 3.0'
   gem 'pry'
   gem 'rack-test'
-  gem 'rack', '~> 1'
-  gem 'codeclimate-test-reporter', require: false
+  gem 'rack', '~> 1.0'
 end

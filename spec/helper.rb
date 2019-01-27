@@ -13,7 +13,6 @@ require 'rspec'
 require 'pry'
 
 RSpec.configure do |config|
-   config.color_enabled = true
    config.tty = true
    config.formatter = :documentation
 end
@@ -22,6 +21,3 @@ $LOAD_PATH.unshift File.expand_path('lib')
 require 'mini_check'
 
 $LOAD_PATH.unshift File.expand_path('spec/support')
-
-require 'codeclimate-test-reporter'
-CodeClimate::TestReporter.start

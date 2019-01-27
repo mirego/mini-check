@@ -1,10 +1,10 @@
 require_relative '../helper'
 
 shared_examples_for 'check' do
-  it{ should respond_to(:to_hash) }
-  it{ should respond_to(:name) }
-  it{ should respond_to(:healthy?) }
-  it{ should respond_to(:run) }
+  it{ is_expected.to respond_to(:to_hash) }
+  it{ is_expected.to respond_to(:name) }
+  it{ is_expected.to respond_to(:healthy?) }
+  it{ is_expected.to respond_to(:run) }
 end
 
 describe MiniCheck::Check do
@@ -32,7 +32,7 @@ describe MiniCheck::Check do
 
   describe 'run' do
     it 'calls the action' do
-      action.should receive(:call)
+      expect(action).to receive(:call)
       subject.run
     end
 
@@ -120,7 +120,7 @@ describe MiniCheck::Check do
 
     context 'when the action raises an exception' do
       before :each do
-        exception.stub(backtrace: ['a'])
+        allow(exception).to receive(:backtrace).and_return ['a']
         allow(action).to receive(:call).and_raise(exception)
       end
 
