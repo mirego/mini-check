@@ -8,7 +8,9 @@ rvm:
   - 2.3.0
 cache: bundler
 before_install:
-  - gem install bundler
+  - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
+  - gem install bundler -v '< 2'
 addons:
   code_climate:
     repo_token: f85fa0b767dbe803b9dba53e89c729db785240245aac0e17f88462581596bc93
+ 
